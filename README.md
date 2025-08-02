@@ -58,6 +58,17 @@ PLEASE MAKE SURE TO CHANGE THE PASSWORD DIRECTLY AFTER YOUR FIRST LOGIN!!!
 
 ---
 
+## 📦 Verfügbare Docker-Tags
+
+Aktuell stehen folgende Tags für das Image zur Verfügung:
+
+- `:1.0.2` – Feste Version, basiert auf Sinusbot 1.0.2
+- `:latest` – Enthält immer die aktuellste Version dieses Docker-Images (nicht zwingend den neuesten Sinusbot selbst)
+
+👉 Empfohlen wird, für produktive Umgebungen einen festen Tag wie `1.0.2` zu verwenden, um unbeabsichtigte Änderungen durch zukünftige Updates zu vermeiden.
+
+---
+
 ## 🔗 Webinterface aufrufen
 
 Nach dem Start erreichst du das Webinterface unter:
