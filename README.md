@@ -108,6 +108,15 @@ Die Nutzung von Sinusbot selbst unterliegt der [FAQ von sinusbot.com](https://si
 
 Mit ❤️ von [CleverAdmin.de](https://www.cleveradmin.de)
 
+---
+
+## 💬 Support & Community
+
+Du hast Fragen, brauchst Unterstützung bei der Einrichtung oder möchtest dich einfach mit anderen austauschen, die ähnliche Projekte betreiben? Dann schau gerne in unserer Techniverse Community vorbei:
+
+👉 **Matrix-Raum:** [#community:techniverse.net](https://matrix.to/#/#community:techniverse.net)  
+Wir freuen uns auf deinen Besuch und helfen dir gerne weiter!
+
 <p align="center">
   <img src="https://assets.techniverse.net/f1/git/graphics/gray0-catonline.svg" alt="">
 </p>
