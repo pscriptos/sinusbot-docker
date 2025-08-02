@@ -1,6 +1,9 @@
 ---
 services:
   sinusbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: repo.techniverse.net/docker-hosted/sinusbot:1.0.2
     container_name: sinusbot
     hostname: sinusbot

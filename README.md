@@ -75,8 +75,6 @@ Die vollständige Dokumentation zur Einrichtung, zur Teamspeak-Integration, zu S
 ## 🛠️ Hinweise
 
 - Der Container läuft als Benutzer `1000:1000`. Falls dein Host-System abweicht, bitte entsprechend anpassen.
-- Teamspeak- und Sinusbot-Container können im selben Docker-Netzwerk betrieben werden – ideal, wenn du eine direkte Verbindung ohne NAT willst.
-- Die Standard-Scripts aus dem Image werden beim **ersten Start automatisch** in den gemounteten Script-Ordner kopiert.
 
 ---
 
@@ -87,9 +85,7 @@ Die Nutzung von Sinusbot selbst unterliegt der [FAQ von sinusbot.com](https://si
 
 ---
 
-Mit ❤️ von [techniverse.net](https://www.techniverse.net)
-
-
+Mit ❤️ von [CleverAdmin.de](https://www.cleveradmin.de)
 
 <p align="center">
   <img src="https://assets.techniverse.net/f1/git/graphics/gray0-catonline.svg" alt="">
