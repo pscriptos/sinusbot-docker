@@ -41,7 +41,7 @@ Sinusbot eignet sich hervorragend für Gaming-Communities, Clans oder private TS
    ```
 
    👉 **Hinweis:**  
-   Falls du kein eigenes Netzwerk verwenden möchtest, kannst du diesen Schritt überspringen. Du musst außerdem den Abschnitt `networks:` in der `docker-compose.yaml` entsprechend entfernen oder anpassen.
+   Falls du kein eigenes Netzwerk verwenden möchtest, kannst du diesen Schritt überspringen. Du musst allerdings den Abschnitt `networks:` in der `docker-compose.yaml` entsprechend entfernen oder anpassen.
 
 6. Container starten  
    ```bash
