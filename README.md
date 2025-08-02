@@ -73,6 +73,12 @@ Aktuell stehen folgende Tags für das Image zur Verfügung:
 
 ---
 
+## 🎥 asciinema Video
+
+[![asciicast](https://asciinema.techniverse.net/a/62.svg)](https://asciinema.techniverse.net/a/62)
+
+---
+
 ## 🔗 Webinterface aufrufen
 
 Nach dem Start erreichst du das Webinterface unter:
