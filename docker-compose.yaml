@@ -1,0 +1,24 @@
+---
+services:
+  sinusbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: repo.techniverse.net/docker-hosted/sinusbot:1.0.2
+    container_name: sinusbot
+    hostname: sinusbot
+    networks:
+      sinusbot.dockernetwork.local:
+        ipv4_address: 172.16.72.10
+    user: "1000:1000"
+    ports:
+      - "8087:8087"
+    volumes:
+      - ./data/config.ini:/opt/sinusbot/config.ini
+      - ./data/data:/opt/sinusbot/data
+      - ./data/scripts:/opt/sinusbot/scripts
+    restart: unless-stopped
+
+networks:
+  sinusbot.dockernetwork.local:
+    external: true
