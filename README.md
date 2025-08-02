@@ -26,12 +26,16 @@ Sinusbot eignet sich hervorragend für Gaming-Communities, Clans oder private TS
    cd sinusbot-docker
    ```
 
-3. Schreibrechte anpassen (Benutzer-ID ggf. anpassen)  
+3. Ordnerstruktur erstellen
+   ```bash
+   mkdir -p ./data/scripts ./data/data
+
+4. Schreibrechte anpassen (Benutzer-ID ggf. anpassen)  
    ```bash
    chown -R 1000:1000 data
    ```
 
-4. (Optional) eigenes Docker-Netzwerk anlegen  
+5. (Optional) eigenes Docker-Netzwerk anlegen  
    ```bash
    docker network create --subnet=172.16.72.0/24 sinusbot.dockernetwork.local
    ```
@@ -39,12 +43,12 @@ Sinusbot eignet sich hervorragend für Gaming-Communities, Clans oder private TS
    👉 **Hinweis:**  
    Falls du kein eigenes Netzwerk verwenden möchtest, kannst du diesen Schritt überspringen. Du musst außerdem den Abschnitt `networks:` in der `docker-compose.yaml` entsprechend entfernen oder anpassen.
 
-5. Container starten  
+6. Container starten  
    ```bash
    docker-compose up -d
    ```
 
-6. Admin-Kennwort anzeigen lassen (wird nur nach dem ersten Start angezeigt)  
+7. Admin-Kennwort anzeigen lassen (wird nur nach dem ersten Start angezeigt)  
    ```bash
    docker-compose logs
    ```
