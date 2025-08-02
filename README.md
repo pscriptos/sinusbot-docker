@@ -29,6 +29,7 @@ Sinusbot eignet sich hervorragend für Gaming-Communities, Clans oder private TS
 3. Ordnerstruktur erstellen
    ```bash
    mkdir -p ./data/scripts ./data/data
+   ```
 
 4. Schreibrechte anpassen (Benutzer-ID ggf. anpassen)  
    ```bash
