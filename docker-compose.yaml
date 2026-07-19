@@ -8,8 +8,8 @@ services:
     container_name: sinusbot
     hostname: sinusbot
     networks:
-      sinusbot.dockernetwork.local:
-        ipv4_address: 172.16.72.10
+      sinusbot_net:
+        ipv4_address: 172.29.84.10
     user: "1000:1000"
     ports:
       - "8087:8087"
@@ -20,5 +20,11 @@ services:
     restart: unless-stopped
 
 networks:
-  sinusbot.dockernetwork.local:
-    external: true
+  sinusbot_net:
+    name: sinusbot.dockernetwork.local
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.29.84.0/24
+          gateway: 172.29.84.1
+          ip_range: 172.29.84.128/25
