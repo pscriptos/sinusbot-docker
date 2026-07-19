@@ -13,7 +13,10 @@ RUN apt-get update && \
     libasound2 libegl1-mesa libfontconfig libglib2.0-0 libnss3 libpci3 \
     libxcomposite-dev libxcursor1 libxdamage1 libxi6 libxkbcommon0 \
     libxkbcommon-x11-0 libxss1 libxslt1.1 libxtst6 x11-xkb-utils \
-    libpulse0 espeak-ng mbrola mbrola-de6 \
+    libpulse0 libevent-2.1-7 libxrandr2 liblcms2-2 libatomic1 \
+    libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 \
+    libxcb-render0 libxcb-shape0 libxcb-xinerama0 \
+    espeak-ng mbrola mbrola-de6 \
     fonts-dejavu fonts-liberation fonts-freefont-ttf \
     && update-ca-certificates && \
     useradd -m -d /home/${BOT_USER} -s /bin/bash ${BOT_USER} && \
