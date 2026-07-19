@@ -1,0 +1,99 @@
+name: Build Docker Image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - docker-compose.yaml
+  workflow_dispatch:
+
+jobs:
+  docker:
+    name: Build & Push Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect image version change
+        id: image
+        shell: bash
+        run: |
+          extract_image() {
+            grep -E '^[[:space:]]*image:[[:space:]]+' "$1" \
+              | head -n1 \
+              | awk '{ print $2 }' \
+              | sed 's/^["'\'']//; s/["'\'']$//'
+          }
+
+          CURRENT_IMAGE="$(extract_image docker-compose.yaml)"
+          if [ -z "$CURRENT_IMAGE" ]; then
+            echo "::error::No image found in docker-compose.yaml"
+            exit 1
+          fi
+
+          OLD_IMAGE=""
+          if [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ]; then
+            if git cat-file -e "${{ github.event.before }}:docker-compose.yaml" 2>/dev/null; then
+              git show "${{ github.event.before }}:docker-compose.yaml" > /tmp/docker-compose.previous.yaml
+              OLD_IMAGE="$(extract_image /tmp/docker-compose.previous.yaml || true)"
+            fi
+          fi
+
+          IMAGE_BASE="${CURRENT_IMAGE%:*}"
+          IMAGE_TAG="${CURRENT_IMAGE##*:}"
+          REGISTRY="${CURRENT_IMAGE%%/*}"
+
+          if [ "$IMAGE_TAG" = "$CURRENT_IMAGE" ] || [ -z "$IMAGE_TAG" ]; then
+            echo "::error::Image must include an explicit tag, e.g. git.techniverse.net/scriptos/sinusbot:1.1"
+            exit 1
+          fi
+
+          CHANGED="false"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$CURRENT_IMAGE" != "$OLD_IMAGE" ]; then
+            CHANGED="true"
+          fi
+
+          echo "current_image=$CURRENT_IMAGE"
+          echo "old_image=${OLD_IMAGE:-<none>}"
+          echo "changed=$CHANGED"
+
+          echo "changed=$CHANGED" >> "$GITHUB_OUTPUT"
+          echo "image=$CURRENT_IMAGE" >> "$GITHUB_OUTPUT"
+          echo "image_base=$IMAGE_BASE" >> "$GITHUB_OUTPUT"
+          echo "tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+          echo "registry=$REGISTRY" >> "$GITHUB_OUTPUT"
+
+      - name: Stop when image version did not change
+        if: steps.image.outputs.changed != 'true'
+        run: echo "Image version unchanged. Skipping Docker build."
+
+      - name: Login to Gitea Container Registry
+        if: steps.image.outputs.changed == 'true'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ steps.image.outputs.registry }}
+          username: ${{ secrets.REGISTRY_USER }}
+          password: ${{ secrets.REGISTRY_TOKEN }}
+
+      - name: Set up Docker Buildx
+        if: steps.image.outputs.changed == 'true'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        if: steps.image.outputs.changed == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ steps.image.outputs.image }}
+            ${{ steps.image.outputs.image_base }}:latest
+          labels: |
+            org.opencontainers.image.title=Sinusbot
+            org.opencontainers.image.version=${{ steps.image.outputs.tag }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.licenses=MIT
