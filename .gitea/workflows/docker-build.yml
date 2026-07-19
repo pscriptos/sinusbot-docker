@@ -10,7 +10,7 @@ on:
 jobs:
   docker:
     name: Build & Push Docker Image
-    runs-on: ubuntu-latest
+    runs-on: linux-amd64
 
     steps:
       - name: Checkout code
@@ -88,7 +88,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          platforms: linux/amd64
           push: true
+          provenance: false
           tags: |
             ${{ steps.image.outputs.image }}
             ${{ steps.image.outputs.image_base }}:latest
